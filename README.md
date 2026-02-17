@@ -1,6 +1,6 @@
 # Keltner Channel Strategy Backtester
 
-A Python-based backtesting framework for **Keltner Channel** trading strategies applied to equity indices. Tests two distinct signal philosophies — **Mean Reversion** and **Breakout** — across multiple position modes, with Buy & Hold benchmarking and synthetic market simulations via Geometric Brownian Motion (GBM).
+A Python-based backtesting framework for **Keltner Channel** trading strategies applied to equity indices. Tests two distinct signal philosophies - **Mean Reversion** and **Breakout** - across multiple position modes, with Buy & Hold benchmarking and synthetic market simulations via Geometric Brownian Motion (GBM).
 
 ---
 
@@ -8,8 +8,8 @@ A Python-based backtesting framework for **Keltner Channel** trading strategies 
 
 The Keltner Channel is a volatility-based envelope built around an Exponential Moving Average (EMA), with upper and lower bands set at a multiple of the Average True Range (ATR). This project exploits that structure in two opposing ways:
 
-- **Mean Reversion (MR):** Assumes prices that breach the channel will snap back — buy when price re-enters from below the lower band, sell when it re-enters from above the upper band.
-- **Breakout (BO):** Assumes a band breach signals momentum — buy when price closes above the upper band, sell when it closes below the lower band.
+- **Mean Reversion (MR):** Assumes prices that breach the channel will snap back - buy when price re-enters from below the lower band, sell when it re-enters from above the upper band.
+- **Breakout (BO):** Assumes a band breach signals momentum - buy when price closes above the upper band, sell when it closes below the lower band.
 
 ---
 
@@ -89,9 +89,9 @@ Lower Band = EMA − ATR_MULT × ATR
 
 The `backtest_keltner()` function supports three position modes:
 
-- `long_only` — holds long or flat
-- `short_only` — holds short or flat
-- `long_short` — always holds a position (long or short)
+- `long_only` - holds long or flat
+- `short_only` - holds short or flat
+- `long_short` - always holds a position (long or short)
 
 Positions are determined on each bar and applied to the *next* bar's return (no look-ahead bias). A flat transaction cost of **0.1%** is applied whenever the position changes.
 
@@ -128,12 +128,12 @@ This isolates strategy behaviour from the specific characteristics of the histor
 
 Running the script produces the following charts in sequence:
 
-1. **Keltner Channel — Mean Reversion Signals** (price chart with buy/sell markers)
-2. **Keltner Channel — Breakout Signals** (price chart with buy/sell markers)
-3. **Equity Curve Comparison** — MR long_only vs BO long_only vs Buy & Hold
-4. **Drawdown Chart** — MR long_only strategy
-5. **Signal Frequency per Year** — bar chart comparing MR and BO signal counts
-6. **Simulated Market Charts** — one per GBM scenario (neutral, bull, bear)
+1. **Keltner Channel - Mean Reversion Signals** (price chart with buy/sell markers)
+2. **Keltner Channel - Breakout Signals** (price chart with buy/sell markers)
+3. **Equity Curve Comparison** - MR long_only vs BO long_only vs Buy & Hold
+4. **Drawdown Chart** - MR long_only strategy
+5. **Signal Frequency per Year** - bar chart comparing MR and BO signal counts
+6. **Simulated Market Charts** - one per GBM scenario (neutral, bull, bear)
 
 Console output includes per-strategy metrics for all 6 combinations, plus the Buy & Hold benchmark.
 
@@ -142,7 +142,7 @@ Console output includes per-strategy metrics for all 6 combinations, plus the Bu
 ## Project Structure
 
 ```
-keltner_backtest.py   # Main script — all logic in a single file
+keltner_backtest.py   # Main script - all logic in a single file
 README.md
 ```
 
@@ -153,5 +153,5 @@ README.md
 - **Slippage** is not modelled; only a flat transaction cost is applied.
 - **Position sizing** is fixed (all-in or all-out). No fractional or risk-based sizing.
 - **Short selling** in `short_only` / `long_short` modes assumes unrestricted shorting, which may not reflect real market conditions for retail traders.
-- The ATR-based transaction cost approximation (`position.diff().abs() × cost`) is a simplification — it charges cost on position *magnitude change*, not notional trade value.
+- The ATR-based transaction cost approximation (`position.diff().abs() × cost`) is a simplification - it charges cost on position *magnitude change*, not notional trade value.
 - Results on `^NSEI` (Nifty 50) reflect a specific index and time period; performance on other instruments or date ranges may differ significantly.
